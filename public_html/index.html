@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <style type="text/css">
+            body{
+                margin: 0px;
+            }
+            .myBtn {
+	background-color:#44c767;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+	border:1px solid #18ab29;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Georgia;
+	font-size:21px;
+	padding:31px 38px;
+        margin: 7px;
+	text-decoration:none;
+	text-shadow:1px 0px 0px #2f6627;
+        }
+        #myBtn {
+	background-color:#7892C2;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+	border:1px solid #4E6096;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Georgia;
+	font-size:21px;
+	padding:31px 38px;
+        margin: 7px;
+	text-decoration:none;
+	text-shadow:1px 0px 0px #2f6627;
+        }
+        .shBtn {
+	background-color:red;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+	border:1px solid #4E6096;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Georgia;
+	font-size:21px;
+	padding:31px 38px;
+        margin: 7px;
+	text-decoration:none;
+	text-shadow:1px 0px 0px #2f6627;
+        }
+        #myBtn:hover {
+                background-color:#476E9E;
+        }
+        .shBtn:hover {
+                background-color:#red;
+        }
+        .myBtn:hover {
+                background-color:#5cbf2a;
+        }
+        #myBtn:active {
+                position:relative;
+                top:1px;
+        }
+        .shBtn:active {
+                position:relative;
+                top:1px;
+        }
+        .myBtn:active {
+                position:relative;
+                top:1px;
+        }
+        .field{
+            background-color: #FFFCCC;
+            border-color: #666666;
+            border-width: 2px;
+            border-style: dotted;
+            
+        }
+        .fieldtop{
+            background-color: #D4D7FE;
+            border-color: #666666;
+            border-width: 2px;
+            border-style: dotted;
+            
+        
+        
+            </style>
+        <title>Sentence Guessing Game</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script>
+            var errcnt=0;
+            var wrngch="";
+            var ccnt=0;
+            var spaceCnt = 0;
+            var sent= new Array("LEARN TO CODE","CODING IS FUN","WRITE YOUR PLANS","CHOOSE THE LANGUAGE","WRITE THE PROGRAM","CHECK FOR ERRORS","FIX THE ERRORS", "REVIEW YOUR CODE", "YOU HAVE YOUR FIRST PROGRAM" );     
+         </script>
+    </head>
+    
+    
+    <body>
+            <fieldset class="fieldtop">
+            <legend> Text Boxes </legend>
+            <script>
+            var i = Math.floor((Math.random() * 9) + 0);
+            document.write(sent[i]+"<br/>");
+            
+            for(var x=0; x<sent[i].length; x++)
+            {
+                
+                var j = sent[i][x];
+                if(j==" ")
+                    spaceCnt++;
+                document.write("<button class="+j+" id='myBtn'></button>");                
+            }
+            document.write("<br/>");
+            document.write("<br/>");
+            
+            
+            function eraseText() {
+                var c =confirm("The Game Will Restart");
+                if(c == true)
+                    location.reload();
+                else
+                {
+                    //nothing happens
+                }
+            }
+            
+            function check(ch) {
+                var val = document.getElementsByClassName(ch);
+                var val2 = document.getElementById(ch);
+                var l=sent[i];
+                var chk = l.indexOf(ch);
+                for (var j = 0; j < l.length; j++)
+                {
+                    if (chk == -1)
+                    {
+                        if(errcnt>=5){
+                            alert("Sorry You Lost The Game, The Sentence is " + sent[i]);
+                            break;
+                        }
+                        else{
+                        alert("Wrong Character");
+                        errcnt++;
+                        document.getElementById("Sh").innerHTML = "Wrong Characters Used:  " +(wrngch+=val2.innerText);
+                        document.getElementById("ShNo").innerHTML = "Wrong Characters:  " +(errcnt);
+                    }
+                        break;
+                     }
+                      
+                    else if(val[j].className == ch && val2.innerText == ch)
+                    {
+                        if(errcnt>=5)
+                            alert("The Game Is Over The Sentence is " + sent[i]);
+                        else if (val[j].innerHTML == ""){
+                         val[j].innerHTML = ch;
+                         ccnt++;                         
+                        }
+                    }
+                    if(ccnt == l.length-spaceCnt)
+                     var r = confirm("You Win, Do You Want to Restart The Game");
+                        if (r == true)
+                            location.reload();
+                        else
+                        {
+                            //nothing happens
+                        }
+                }
+                 
+            }
+            </script>
+            <fieldset class="field">
+                <legend>Alphabet Choice</legend>
+                <button type="button" onclick="check('A')" class="myBtn" id="A">A</button>
+                <button type="button" onclick="check('B')" class="myBtn" id="B">B</button>
+                <button type="button" onclick="check('C')" class="myBtn" id="C">C</button>
+                <button type="button" onclick="check('D')" class="myBtn" id="D">D</button>
+                <button type="button" onclick="check('E')" class="myBtn" id="E">E</button>
+                <button type="button" onclick="check('F')" class="myBtn" id="F">F</button>
+                <button type="button" onclick="check('G')" class="myBtn" id="G">G</button>
+                <button type="button" onclick="check('H')" class="myBtn" id="H">H</button>
+                <button type="button" onclick="check('I')" class="myBtn" id="I">I</button>
+                <button type="button" onclick="check('J')" class="myBtn" id="J">J</button>
+                <button type="button" onclick="check('K')" class="myBtn" id="K">K</button>
+                <button type="button" onclick="check('L')" class="myBtn" id="L">L</button>
+                <button type="button" onclick="check('M')" class="myBtn" id="M">M</button>
+                <button type="button" onclick="check('N')" class="myBtn" id="N">N</button>
+                <button type="button" onclick="check('O')" class="myBtn" id="O">O</button>
+                <button type="button" onclick="check('P')" class="myBtn" id="P">P</button>
+                <button type="button" onclick="check('Q')" class="myBtn" id="Q">Q</button>
+                <button type="button" onclick="check('R')" class="myBtn" id="R">R</button>
+                <button type="button" onclick="check('S')" class="myBtn" id="S">S</button>
+                <button type="button" onclick="check('T')" class="myBtn" id="T">T</button>
+                <button type="button" onclick="check('U')" class="myBtn" id="U">U</button>
+                <button type="button" onclick="check('V')" class="myBtn" id="V">V</button>
+                <button type="button" onclick="check('W')" class="myBtn" id="W">W</button>
+                <button type="button" onclick="check('X')" class="myBtn" id="X">X</button>
+                <button type="button" onclick="check('Y')" class="myBtn" id="Y">Y</button>
+                <button type="button" onclick="check('Z')" class="myBtn" id="Z">Z</button>
+                <button type="button" onclick="showWch()" class="shBtn" id="Sh">Wrong Characters Used:  </button>
+                <button type="button" onclick="showWch()" class="shBtn" id="ShNo">Wrong Characters: 0</button>
+                <button type="button" onclick="eraseText()" class="shBtn">RESTART</button>
+                <br/>
+                <br/>
+            </fieldset>
+        </fieldset>
+    </body>   
+</html>
